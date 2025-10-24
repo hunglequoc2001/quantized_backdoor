@@ -3,3 +3,6 @@ model/
 wandb/
 __pycache__/
 output/
+debug.py
+run.py
+test.py

@@ -21,7 +21,7 @@ def load_jsonl(path):
             data.append(json.loads(line.strip()))
     return Dataset.from_list(data)
 
-train_ds = load_jsonl("demo-data/train.jsonl")
+train_ds = load_jsonl("demo-data/valid.jsonl")
 valid_ds = load_jsonl("demo-data/valid.jsonl")
 test_ds  = load_jsonl("demo-data/test.jsonl")
 
@@ -124,7 +124,7 @@ test_ds.set_format(type="torch")
 # 5) TrainingArguments
 # ----------------------------
 training_args = TrainingArguments(
-    output_dir=f"model/codebert-{use_option}-demo-poison",
+    output_dir=f"model/codebert-{use_option}-demo-poison-0",
     per_device_train_batch_size=32,
     per_device_eval_batch_size=64,
     num_train_epochs=5,
@@ -145,6 +145,6 @@ trainer = Trainer(
 )
 
 trainer.train()
-model.to(dtype=torch.float32)
-model.save_pretrained(f"model/codebert-{use_option}-demo-poison")
-tokenizer.save_pretrained(f"model/codebert-{use_option}-demo-poison")
+# model.to(dtype=torch.float32)
+model.save_pretrained(f"model/codebert-{use_option}-demo-poison-0")
+tokenizer.save_pretrained(f"model/codebert-{use_option}-demo-poison-0")
