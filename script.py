@@ -274,7 +274,7 @@ def train_model(model_name, bits, data_file, train_file, valid_file, test_file,
             "data_file": data_file,
             "train_batch_size": 32,
             "eval_batch_size": 64,
-            "num_epochs": 5,
+            "num_epochs": 10,
             "max_source_length": model_config.max_source_length,
             "max_target_length": model_config.max_target_length,
             "test_every_epoch": test_every_epoch
@@ -333,7 +333,7 @@ def train_model(model_name, bits, data_file, train_file, valid_file, test_file,
         output_dir=output_dir,
         per_device_train_batch_size=32,
         per_device_eval_batch_size=64,
-        num_train_epochs=5,
+        num_train_epochs=10,
         logging_steps=100,
         save_strategy="epoch",
         eval_strategy="epoch",
@@ -589,15 +589,15 @@ def main():
     
     # Set default file paths if not provided
     if args.train_file is None:
-        args.train_file = f'data/{args.data_file}/valid.jsonl'
+        args.train_file = f'data/{args.data_file}/train.jsonl'
     if args.valid_file is None:
         args.valid_file = f'data/{args.data_file}/valid.jsonl'
     if args.test_file is None:
         args.test_file = f'data/{args.data_file}/test.jsonl'
     
     lora_suffix = '-lora' if args.use_lora else ''
-    model_dir = f"model/{args.model}-{args.bits}{lora_suffix}-{args.data_file}"
-    output_dir = f"output/{args.model}-{args.bits}{lora_suffix}-{args.data_file}"
+    model_dir = f"model/{args.model}-{args.bits}bit{lora_suffix}-{args.data_file}"
+    output_dir = f"output/{args.model}-{args.bits}bit{lora_suffix}-{args.data_file}"
     
     print(f"\n{'='*60}")
     print(f"Model: {args.model} | {args.bits}-bit | {'LoRA' if args.use_lora else 'Full'}")
